@@ -1,8 +1,8 @@
 source("R/data.r")
 source("R/funciones.r")
+source("R/variablesGlobales.r")
 
 #Proyecto de final de curso PyE 2026
-
 
 
 #Con el archivo que contiene 10.000 registros correspondientes a 4 semanas de lunes a viernes,
@@ -15,9 +15,7 @@ source("R/funciones.r")
 
 #2. Promedio de hora de inicio del uso del estacionamiento.
 
-  datosHoras <- convertirAMinutos(MA$hora_inicio)
-
-  promedio <- mean(datosHoras)
+  promedio <- mean(minutosInicio)
 
   datosFormateados <- formatoHoraMinutos(promedio)
 
@@ -54,11 +52,10 @@ source("R/funciones.r")
 
 #4. Usuarios promedios por semana y por dia de la semana.
 
-    diasDeLaSemana <-5      #lunes a vieenes por defecto
 
   #usuarios prom por semana
 
-    usuariosPorSemana <- table(ceiling(MA$dia / 5))  #tabla con sumatoria de usuarios separados por semana
+    usuariosPorSemana <- table(ceiling(MA$dia / diasPorSemana))  #tabla con sumatoria de usuarios separados por semana
     promUsuariosSemana <- mean(usuariosPorSemana)
 
     cat("1-4a) Promedio de usuarios por semana:", promUsuariosSemana)
@@ -67,11 +64,8 @@ source("R/funciones.r")
   #usuarios prom por dia de semana
 
 
-    diaSemana <- (MA$dia - 1) %%  diasDeLaSemana + 1            #dia dentro de la semana (1 a x), se reinicia cada semana
-    nSemanas <- ceiling(max(MA$dia) /  diasDeLaSemana)          #cantidad de semanas, se adapta a los datos
-
-    usuariosPorDiaSemana <- table(factor(diaSemana, levels = 1: diasDeLaSemana))  #total de usuarios de todos los lunes, martes, etc.
-    promUsuariosDiaSemana <- usuariosPorDiaSemana / nSemanas
+    usuariosPorDiaSemana <- table(factor(diaSemana, levels = 1: diasPorSemana))  #total de usuarios de todos los lunes, martes, etc.
+    promUsuariosDiaSemana <- usuariosPorDiaSemana / cantidadSemanas
 
     cat("1-4b) Promedio de usuarios por dia de la semana: \n\nLunes:     ", promUsuariosDiaSemana[1], "\nMartes:    ", promUsuariosDiaSemana[2], "\nMiercoles: ", promUsuariosDiaSemana[3], "\nJueves:    ", promUsuariosDiaSemana[4], "\nViernes:   ", promUsuariosDiaSemana[5])
     separador()
@@ -79,7 +73,16 @@ source("R/funciones.r")
 
 
 #5. Luego realice los calculo discriminando dias de la semana, horario(manana/tarde)
+
+    promUsuariosDiaTurno <- table(diaSemana, turno) / cantidadSemanas
+
+    cat("Promedio de usuarios por dia de la semana y turno:\n")
+    print(promUsuariosDiaTurno)
+    separador()
+
 #6. Realizar un muestreo sistemático uno de cada 10 datos, y hacer un intervalo de confianza para proporciones, para compararlo con la proporción poblacional de autos multados.
+
+
 #7. Hacer un intervalo de confianza al 95 % para proporciones y determinar si representa el total de los datos.
 
 
