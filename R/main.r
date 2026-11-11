@@ -76,9 +76,22 @@ source("R/variablesGlobales.r")
 
     promUsuariosDiaTurno <- table(diaSemana, turno) / cantidadSemanas
 
-    cat("Promedio de usuarios por dia de la semana y turno:\n")
-    print(promUsuariosDiaTurno)
+    cat("1-5a) Promedio de usuarios por dia de la semana (Manana): \n
+         \nLunes:     ", promUsuariosDiaTurno[1, 1],
+        "\nMartes:    ", promUsuariosDiaTurno[2, 1],
+        "\nMiercoles: ", promUsuariosDiaTurno[3, 1],
+        "\nJueves:    ", promUsuariosDiaTurno[4, 1],
+        "\nViernes:   ", promUsuariosDiaTurno[5, 1])
+
+    cat("\n\n1-5b) Promedio de usuarios por dia de la semana (Tarde):
+        \n\nLunes:     ", promUsuariosDiaTurno[1, 2],
+        "\nMartes:    ", promUsuariosDiaTurno[2, 2],
+        "\nMiercoles: ", promUsuariosDiaTurno[3, 2],
+        "\nJueves:    ", promUsuariosDiaTurno[4, 2],
+        "\nViernes:   ", promUsuariosDiaTurno[5, 2])
+
     separador()
+
 
 #6. Realizar un muestreo sistemático uno de cada 10 datos, y hacer un intervalo de confianza para proporciones, para compararlo con la proporción poblacional de autos multados.
 
