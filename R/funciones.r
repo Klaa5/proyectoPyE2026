@@ -21,3 +21,9 @@ formatoHoraMinutos <- function(minutos)
 
   return(sprintf("%02d:%02d", horas, minutos_restantes))
 }
+
+separador <-function()
+{
+  cat("\n ______________________________________________ \n\n")
+}
+
