@@ -67,6 +67,14 @@ source("R/funciones.r")
   #usuarios prom por dia de semana
 
 
+    diaSemana <- (MA$dia - 1) %%  diasDeLaSemana + 1            #dia dentro de la semana (1 a x), se reinicia cada semana
+    nSemanas <- ceiling(max(MA$dia) /  diasDeLaSemana)          #cantidad de semanas, se adapta a los datos
+
+    usuariosPorDiaSemana <- table(factor(diaSemana, levels = 1: diasDeLaSemana))  #total de usuarios de todos los lunes, martes, etc.
+    promUsuariosDiaSemana <- usuariosPorDiaSemana / nSemanas
+
+    cat("1-4b) Promedio de usuarios por dia de la semana: \n\nLunes:     ", promUsuariosDiaSemana[1], "\nMartes:    ", promUsuariosDiaSemana[2], "\nMiercoles: ", promUsuariosDiaSemana[3], "\nJueves:    ", promUsuariosDiaSemana[4], "\nViernes:   ", promUsuariosDiaSemana[5])
+    separador()
 
 
 
