@@ -27,3 +27,12 @@ separador <-function()
   cat("\n ______________________________________________ \n\n")
 }
 
+graficarPorDiaSemana <- function(promedios, titulo, color = "steelblue", limiteY = max(promedios) * 1.15)
+{
+  barplot(promedios,
+          names.arg = nombresDias,
+          main = titulo,
+          ylab = "Cant usuarios prom",
+          col = color,
+          ylim = c(0, limiteY))
+}

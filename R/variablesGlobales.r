@@ -1,13 +1,27 @@
 #variables globales, se reutilizan mucho
 
-diasPorSemana <-5                                                     #por defecto de lun a vie
+#M
 
-cantidadSemanas <- ceiling(max(MA$dia) /  diasPorSemana)                #cantidad de semanas, se adapta a los datos
+diasPorSemana <-5                   #por defecto de lun a vie
 
-cambioTurno <- 13 * 60                                                 #hora de pasaje de maniana a tarde, seteado por default a las 13HS
+horaCambioTurno <- 13             #el cambio de turno por defecto a las 13hs
 
-minutosInicio <- convertirAMinutos(MA$hora_inicio)                     #las horas de inicio de uso de estacionamiento pasadas a minutos
 
-diaSemana <- factor((MA$dia - 1) %% diasPorSemana + 1, levels = 1:diasPorSemana)  #dia dentro de la semana (1 a x), se reinicia cada semana
 
-turno <- factor(ifelse(minutosInicio < cambioTurno, "Manana", "Tarde"), levels = c("Manana", "Tarde"))
+#NM
+
+cantidadRegistros <-nrow(MA)          #total de reg
+
+cantidadMultados <-sum(MA$multa == 1)   #total users multados
+
+cambioTurno <- horaCambioTurno * 60                            #calculo basico y var en minutos para el cambio de turno
+
+cantidadSemanas <- ceiling(max(MA$dia) /  diasPorSemana)                #calculo y var cantidad de semanas
+
+minutosInicio <- convertirAMinutos(MA$hora_inicio)                     #horas de inicio de uso de estacionamiento pasadas a minutos
+
+diaSemana <- factor((MA$dia - 1) %% diasPorSemana + 1, levels = 1:diasPorSemana)          #dia dentro de la semana (1 a x), se reinicia cada semana
+
+nombresDias <- c("Lun", "Mar", "Mie", "Jue", "Vie")
+
+tamanoMuestraAleatoria <- 1000
