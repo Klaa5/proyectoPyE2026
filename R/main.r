@@ -110,75 +110,10 @@ cat("    Proyecto de final de curso PyE 2026")
 #6. Realizar un muestreo sistematico uno de cada 10 datos, y hacer un intervalo de confianza para proporciones, para compararlo con la proporcion poblacional de autos multados.
 
 
-    saltoMuestreo <- 10        #se toma 1 de cada 10 registros
-    zCritico95 <- 1.96         #valor z para 95 % de confianza
-
-
-    #muestreo sistematico: se recorren las filas 1, 11, 21, 31...
-    tamanoMuestra <- 0           #cuantos registros entran en la muestra
-    multadosMuestra <- 0         #cuantos de esos estan multados
-
-    for (filaIterada in seq(1, cantidadRegistros, by = saltoMuestreo))
-    {
-      tamanoMuestra <- tamanoMuestra + 1
-      multadosMuestra <- multadosMuestra + MA$multa[filaIterada]    #multa es 0 o 1, sumar equivale a contar los multados
-    }
-
-    #intervalo de confianza para la proporcion
-    propMuestra <- multadosMuestra / tamanoMuestra
-
-    margenError <- zCritico95 * sqrt(propMuestra * (1 - propMuestra) / tamanoMuestra)
-
-    limiteInferior <- propMuestra - margenError
-    limiteSuperior <- propMuestra + margenError
-
-    #comparacion con la proporcion poblacional (la del punto 3b)
-    propPoblacion <- promedioMulta
-    poblacionDentro <- propPoblacion >= limiteInferior & propPoblacion <= limiteSuperior
-
-    cat("1-6) Muestreo sistematico (1 de cada", saltoMuestreo, ") y proporcion de multados:\n\n",
-        "Tamanio de la muestra:       ", tamanoMuestra,
-        "\nMultados en la muestra:     ", multadosMuestra,
-        "\nProporcion muestral:        ", propMuestra,
-        "\nIntervalo de confianza 95 %: [", limiteInferior, ",", limiteSuperior, "]",
-        "\nProporcion poblacional:     ", propPoblacion,
-        "\nLa poblacional esta dentro del intervalo:", poblacionDentro, "\n")
-    separador()
 
 #7. Hacer un intervalo de confianza al 95 % para proporciones y determinar si representa el total de los datos.
 
 
-    set.seed(123)                                                   #para que el resultado sea repetible
-
-    #muestreo aleatorio simple: filas elegidas al azar, sin repetir
-    filasElegidas <- sample(1:cantidadRegistros, tamanoMuestraAleatoria)
-
-    multadosAleatoria <- 0       #cuantos de la muestra estan multados
-
-    for (filaIterada in filasElegidas)
-    {
-      multadosAleatoria <- multadosAleatoria + MA$multa[filaIterada]    #multa es 0 o 1, sumar equivale a contar
-    }
-
-    #intervalo de confianza para la proporcion
-    propAleatoria <- multadosAleatoria / tamanoMuestraAleatoria
-
-    margenErrorAleatoria <- zCritico95 * sqrt(propAleatoria * (1 - propAleatoria) / tamanoMuestraAleatoria)
-
-    limiteInferiorAleatoria <- propAleatoria - margenErrorAleatoria
-    limiteSuperiorAleatoria <- propAleatoria + margenErrorAleatoria
-
-    #comparacion con el total de los datos
-    representaTotal <- promedioMulta >= limiteInferiorAleatoria & promedioMulta <= limiteSuperiorAleatoria
-
-    cat("1-7) Muestreo aleatorio simple y proporcion de multados (95 %):\n\n",
-        "Tamanio de la muestra:       ", tamanoMuestraAleatoria,
-        "\nMultados en la muestra:     ", multadosAleatoria,
-        "\nProporcion muestral:        ", propAleatoria,
-        "\nIntervalo de confianza 95 %: [", limiteInferiorAleatoria, ",", limiteSuperiorAleatoria, "]",
-        "\nProporcion del total:       ", promedioMulta,
-        "\nLa muestra representa al total:", representaTotal, "\n")
-    separador()
 
 #Se busca contestar:
 
