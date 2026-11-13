@@ -1,6 +1,6 @@
 #variables globales, se reutilizan mucho
 
-#M
+#Mod
 
 diasPorSemana <-5                   #por defecto de lun a vie
 
@@ -8,7 +8,7 @@ horaCambioTurno <- 13             #el cambio de turno por defecto a las 13hs
 
 
 
-#NM
+#NMod
 
 cantidadRegistros <-nrow(MA)          #total de reg
 
